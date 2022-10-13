@@ -1,3 +1,3 @@
-export function createUseUserKey() {
-  return ["useUser"];
+export function createUseUserDataKey() {
+  return ["useUserData"];
 }
