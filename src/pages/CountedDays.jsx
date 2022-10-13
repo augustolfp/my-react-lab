@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useQueryClient } from "react-query";
+import { useTheme, useThemeToggle } from "../contexts/ThemeContext";
 
 export default function CountedDays() {
+  const theme = useTheme();
+  const toggleTheme = useThemeToggle();
   const queryClient = useQueryClient();
   const { data, isFetching } = useQuery(
     "userData",
@@ -28,7 +30,7 @@ export default function CountedDays() {
   }
   return (
     <>
-      <Container>
+      <Container darkTheme={theme}>
         {isFetching ? (
           <h1>Loading...</h1>
         ) : (
@@ -50,11 +52,13 @@ export default function CountedDays() {
         )}
       </Container>
       <DayCreator onClick={handleDayCreation}>Salve quebrada</DayCreator>
+      <button onClick={toggleTheme}>TOGGLE THEME</button>
     </>
   );
 }
 
 const Container = styled.div`
+  color: ${(props) => (props.darkTheme ? "black" : "red")};
   div {
     border: solid 3px blue;
     margin: 5px;
