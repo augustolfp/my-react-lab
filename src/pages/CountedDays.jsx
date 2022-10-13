@@ -1,10 +1,11 @@
 import { useThemeToggle } from "../contexts/ThemeContext";
-import { useUserData } from "../services/userData";
+import { useData, useDataFetchStatus } from "../contexts/DataContext";
 import { DayItem } from "../components/DayItem";
 
 export default function CountedDays() {
-  const { data: userData, isFetching } = useUserData();
   const toggleTheme = useThemeToggle();
+  const isFetching = useDataFetchStatus();
+  const userData = useData();
 
   return (
     <>
