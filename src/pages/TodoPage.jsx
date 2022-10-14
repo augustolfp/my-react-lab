@@ -4,11 +4,28 @@ import Todo from "../components/Todo";
 
 const ACTIONS = {
   ADD_TODO: "add_todo",
+  TOGGLE_TODO: "toggle_todo",
+  DELETE_TODO: "delete_todo",
 };
 
 function reducer(todos, action) {
   if (action.type === ACTIONS.ADD_TODO) {
     return [...todos, newTodo(action.payload.name)];
+  }
+
+  if (action.type === ACTIONS.TOGGLE_TODO) {
+    return todos.map((todo) => {
+      if (todo.id === action.payload.id) {
+        return { ...todo, complete: !todo.complete };
+      }
+      return todo;
+    });
+  }
+
+  if (action.type === ACTIONS.DELETE_TODO) {
+    return todos.filter((todo) => {
+      return todo.id !== action.payload.id;
+    });
   }
 }
 
@@ -26,6 +43,14 @@ export default function TodoPage() {
     setName("");
   }
 
+  function handleToggle(id) {
+    dispatch({ type: ACTIONS.TOGGLE_TODO, payload: { id: id } });
+  }
+
+  function handleDelete(id) {
+    dispatch({ type: ACTIONS.DELETE_TODO, payload: { id: id } });
+  }
+
   return (
     <Container>
       <form onSubmit={handleSubmit}>
@@ -35,11 +60,16 @@ export default function TodoPage() {
           onChange={(e) => setName(e.target.value)}
         />
       </form>
-      <ul>
-        {todos.map((todo, index) => {
-          return <Todo key={index}>{todo.name}</Todo>;
-        })}
-      </ul>
+      {todos.map((todo) => {
+        return (
+          <Todo
+            toggle={handleToggle}
+            handleDelete={handleDelete}
+            key={todo.id}
+            {...todo}
+          />
+        );
+      })}
     </Container>
   );
 }
