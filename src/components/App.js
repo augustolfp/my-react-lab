@@ -6,6 +6,7 @@ import { ThemeProvider } from "../contexts/ThemeContext";
 import { DataProvider } from "../contexts/DataContext";
 import { QueryClient, QueryClientProvider } from "react-query";
 import CounterPage from "../pages/CounterPage";
+import TodoPage from "../pages/TodoPage";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ export default function App() {
             <Route path="/counted-days" element={<CountedDays />} />
             <Route path="/counted-day/:id" element={<CountedDay />} />
             <Route path="/counter-page" element={<CounterPage />} />
+            <Route path="/todo-page" element={<TodoPage />} />
           </Routes>
         </ThemeProvider>
       </DataProvider>
