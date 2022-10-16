@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useAddDay } from "../services/userData";
+import { useAddDay } from "../../services/userData";
 
 export function DayCreator() {
   const { mutate: addDay } = useAddDay();

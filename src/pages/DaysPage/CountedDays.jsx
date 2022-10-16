@@ -1,7 +1,7 @@
-import { useThemeToggle } from "../contexts/ThemeContext";
-import { useData, useDataFetchStatus } from "../contexts/DataContext";
-import { DayItem } from "../components/DayItem";
-import { DayCreator } from "../components/DayCreator";
+import { useThemeToggle } from "../../contexts/ThemeContext";
+import { useData, useDataFetchStatus } from "../../contexts/DataContext";
+import { DayItem } from "./DayItem";
+import { DayCreator } from "./DayCreator";
 
 export default function CountedDays() {
   const toggleTheme = useThemeToggle();
